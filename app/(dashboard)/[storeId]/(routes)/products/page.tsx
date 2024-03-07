@@ -28,13 +28,14 @@ const ProductsPage = async ({
   const formattedProducts: ProductColumn[] = products.map((item) => ({
     id: item.id,
     name: item.name,
-    isFeatured: item.isFeatured,
-    isArchived: item.isArchived,
+    codigo: item.codigo,
     price: formatter.format(item.price.toNumber()),
     category: item.category.name,
     size: item.size.name,
     color: item.color.value,
-    createdAt: format(item.createdAt, 'MMMM do, yyyy'),
+    isFeatured: item.isFeatured,
+    isArchived: item.isArchived,
+    createdAt: format(item.createdAt, "MMMM do, yyyy"),
   }));
 
   return (

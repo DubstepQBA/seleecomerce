@@ -12,16 +12,17 @@ export async function POST(
 
     const body = await req.json();
 
-    const { name, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
+    const { name,codigo, price, categoryId, colorId, sizeId, images, isFeatured, isArchived } = body;
 
     if (!userId) {
       return new NextResponse("Unauthenticated", { status: 403 });
     }
-
+    if(!codigo){
+      return new NextResponse("Name is required", { status: 400 });
+    }
     if (!name) {
       return new NextResponse("Name is required", { status: 400 });
     }
-
     if (!images || !images.length) {
       return new NextResponse("Images are required", { status: 400 });
     }
@@ -60,6 +61,7 @@ export async function POST(
     const product = await prismadb.product.create({
       data: {
         name,
+        codigo,
         price,
         isFeatured,
         isArchived,
