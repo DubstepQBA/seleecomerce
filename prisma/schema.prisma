@@ -59,20 +59,18 @@ model Product {
   price      Decimal
   isFeatured Boolean     @default(false)
   isArchived Boolean     @default(false)
-  sizeId     String
   colorId    String
   createdAt  DateTime    @default(now())
   updatedAt  DateTime    @updatedAt
   store      Store       @relation("StoreToProduct", fields: [storeId], references: [id])
   category   Category    @relation("CategoryToProduct", fields: [categoryId], references: [id])
-  size       Size        @relation(fields: [sizeId], references: [id])
+  description String 
   color      Color       @relation(fields: [colorId], references: [id])
   images     Image[]
   orderItems OrderItem[]
 
   @@index([storeId])
   @@index([categoryId])
-  @@index([sizeId])
   @@index([colorId])
 }
 
@@ -109,8 +107,6 @@ model Size {
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   store     Store     @relation("StoreToSize", fields: [storeId], references: [id])
-  products  Product[]
-
   @@index([storeId])
 }
 
